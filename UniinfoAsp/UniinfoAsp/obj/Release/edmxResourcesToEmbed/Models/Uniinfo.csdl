@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UnipModelEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Chamado">
+    <Key>
+      <PropertyRef Name="idChamado" />
+    </Key>
+    <Property Name="idChamado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idFuncionario" Type="Int32" Nullable="false" />
+    <Property Name="idProblema" Type="Int32" Nullable="false" />
+    <Property Name="descricao" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="dataChamado" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="statusAtendimento" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Funcionario" Relationship="Self.FK__Chamado__idFunci__5441852A" FromRole="Chamado" ToRole="Funcionario" />
+    <NavigationProperty Name="Problema" Relationship="Self.FK__Chamado__idProbl__5535A963" FromRole="Chamado" ToRole="Problema" />
+    <NavigationProperty Name="chamadoAtendimentoes" Relationship="Self.FK__chamadoAt__idCha__5629CD9C" FromRole="Chamado" ToRole="chamadoAtendimento" />
+  </EntityType>
+  <EntityType Name="chamadoAtendimento">
+    <Key>
+      <PropertyRef Name="idAtendimento" />
+    </Key>
+    <Property Name="idAtendimento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idFuncionario" Type="Int32" Nullable="false" />
+    <Property Name="idChamado" Type="Int32" Nullable="false" />
+    <Property Name="dataAtendimento" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Chamado" Relationship="Self.FK__chamadoAt__idCha__5629CD9C" FromRole="chamadoAtendimento" ToRole="Chamado" />
+    <NavigationProperty Name="Funcionario" Relationship="Self.FK__chamadoAt__idFun__571DF1D5" FromRole="chamadoAtendimento" ToRole="Funcionario" />
+  </EntityType>
+  <EntityType Name="Funcionario">
+    <Key>
+      <PropertyRef Name="idFuncionario" />
+    </Key>
+    <Property Name="idFuncionario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ramal" Type="Int32" />
+    <Property Name="nComputador" Type="Int32" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="setor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Chamadoes" Relationship="Self.FK__Chamado__idFunci__5441852A" FromRole="Funcionario" ToRole="Chamado" />
+    <NavigationProperty Name="chamadoAtendimentoes" Relationship="Self.FK__chamadoAt__idFun__571DF1D5" FromRole="Funcionario" ToRole="chamadoAtendimento" />
+    <NavigationProperty Name="Loginns" Relationship="Self.FK__Loginn__idFuncio__5812160E" FromRole="Funcionario" ToRole="Loginn" />
+  </EntityType>
+  <EntityType Name="Loginn">
+    <Key>
+      <PropertyRef Name="idLogin" />
+    </Key>
+    <Property Name="idLogin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idFuncionario" Type="Int32" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idNivelAcesso" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Funcionario" Relationship="Self.FK__Loginn__idFuncio__5812160E" FromRole="Loginn" ToRole="Funcionario" />
+    <NavigationProperty Name="nivelAcesso" Relationship="Self.FK__Loginn__idNivelA__59063A47" FromRole="Loginn" ToRole="nivelAcesso" />
+  </EntityType>
+  <EntityType Name="nivelAcesso">
+    <Key>
+      <PropertyRef Name="idNivelAcesso" />
+    </Key>
+    <Property Name="idNivelAcesso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipoAcesso" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Loginns" Relationship="Self.FK__Loginn__idNivelA__59063A47" FromRole="nivelAcesso" ToRole="Loginn" />
+  </EntityType>
+  <EntityType Name="Problema">
+    <Key>
+      <PropertyRef Name="idProblema" />
+    </Key>
+    <Property Name="idProblema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipoProblema" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Chamadoes" Relationship="Self.FK__Chamado__idProbl__5535A963" FromRole="Problema" ToRole="Chamado" />
+  </EntityType>
+  <EntityType Name="Con_Chamado">
+    <Key>
+      <PropertyRef Name="descricao" />
+      <PropertyRef Name="dataChamado" />
+      <PropertyRef Name="statusAtendimento" />
+      <PropertyRef Name="nome" />
+    </Key>
+    <Property Name="descricao" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="dataChamado" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="statusAtendimento" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Chamado__idFunci__5441852A">
+    <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+    <End Role="Chamado" Type="Self.Chamado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionario">
+        <PropertyRef Name="idFuncionario" />
+      </Principal>
+      <Dependent Role="Chamado">
+        <PropertyRef Name="idFuncionario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Chamado__idProbl__5535A963">
+    <End Role="Problema" Type="Self.Problema" Multiplicity="1" />
+    <End Role="Chamado" Type="Self.Chamado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Problema">
+        <PropertyRef Name="idProblema" />
+      </Principal>
+      <Dependent Role="Chamado">
+        <PropertyRef Name="idProblema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chamadoAt__idCha__5629CD9C">
+    <End Role="Chamado" Type="Self.Chamado" Multiplicity="1" />
+    <End Role="chamadoAtendimento" Type="Self.chamadoAtendimento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chamado">
+        <PropertyRef Name="idChamado" />
+      </Principal>
+      <Dependent Role="chamadoAtendimento">
+        <PropertyRef Name="idChamado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chamadoAt__idFun__571DF1D5">
+    <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+    <End Role="chamadoAtendimento" Type="Self.chamadoAtendimento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionario">
+        <PropertyRef Name="idFuncionario" />
+      </Principal>
+      <Dependent Role="chamadoAtendimento">
+        <PropertyRef Name="idFuncionario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Loginn__idFuncio__5812160E">
+    <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+    <End Role="Loginn" Type="Self.Loginn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionario">
+        <PropertyRef Name="idFuncionario" />
+      </Principal>
+      <Dependent Role="Loginn">
+        <PropertyRef Name="idFuncionario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Loginn__idNivelA__59063A47">
+    <End Role="nivelAcesso" Type="Self.nivelAcesso" Multiplicity="1" />
+    <End Role="Loginn" Type="Self.Loginn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nivelAcesso">
+        <PropertyRef Name="idNivelAcesso" />
+      </Principal>
+      <Dependent Role="Loginn">
+        <PropertyRef Name="idNivelAcesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UnipEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Chamadoes" EntityType="Self.Chamado" />
+    <EntitySet Name="chamadoAtendimentoes" EntityType="Self.chamadoAtendimento" />
+    <EntitySet Name="Funcionarios" EntityType="Self.Funcionario" />
+    <EntitySet Name="Loginns" EntityType="Self.Loginn" />
+    <EntitySet Name="nivelAcessoes" EntityType="Self.nivelAcesso" />
+    <EntitySet Name="Problemas" EntityType="Self.Problema" />
+    <EntitySet Name="Con_Chamado" EntityType="Self.Con_Chamado" />
+    <AssociationSet Name="FK__Chamado__idFunci__5441852A" Association="Self.FK__Chamado__idFunci__5441852A">
+      <End Role="Funcionario" EntitySet="Funcionarios" />
+      <End Role="Chamado" EntitySet="Chamadoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Chamado__idProbl__5535A963" Association="Self.FK__Chamado__idProbl__5535A963">
+      <End Role="Problema" EntitySet="Problemas" />
+      <End Role="Chamado" EntitySet="Chamadoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chamadoAt__idCha__5629CD9C" Association="Self.FK__chamadoAt__idCha__5629CD9C">
+      <End Role="Chamado" EntitySet="Chamadoes" />
+      <End Role="chamadoAtendimento" EntitySet="chamadoAtendimentoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chamadoAt__idFun__571DF1D5" Association="Self.FK__chamadoAt__idFun__571DF1D5">
+      <End Role="Funcionario" EntitySet="Funcionarios" />
+      <End Role="chamadoAtendimento" EntitySet="chamadoAtendimentoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Loginn__idFuncio__5812160E" Association="Self.FK__Loginn__idFuncio__5812160E">
+      <End Role="Funcionario" EntitySet="Funcionarios" />
+      <End Role="Loginn" EntitySet="Loginns" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Loginn__idNivelA__59063A47" Association="Self.FK__Loginn__idNivelA__59063A47">
+      <End Role="nivelAcesso" EntitySet="nivelAcessoes" />
+      <End Role="Loginn" EntitySet="Loginns" />
+    </AssociationSet>
+    <EntitySet Name="vFuncionarios" EntityType="UnipModelEntities.vFuncionario" />
+  </EntityContainer>
+  <EntityType Name="vFuncionario">
+    <Key>
+      <PropertyRef Name="idFuncionario" />
+      <PropertyRef Name="nome" />
+      <PropertyRef Name="email" />
+      <PropertyRef Name="setor" />
+    </Key>
+    <Property Name="idFuncionario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ramal" Type="Int32" />
+    <Property Name="nComputador" Type="Int32" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="setor" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

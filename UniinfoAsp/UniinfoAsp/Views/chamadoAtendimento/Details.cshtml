@@ -1,0 +1,43 @@
+﻿@model UniinfoAsp.Models.chamadoAtendimento
+
+@{
+    ViewBag.Title = "Detalhes";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.ViewBag
+
+<div style="margin:90px 250px 20px 320px;">
+    <h4>Deletar</h4>
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.Chamado.dataChamado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chamado.dataChamado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Chamado.Problema.tipoProblema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chamado.Problema.tipoProblema)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Chamado.descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chamado.descricao)
+        </dd>
+    </dl>
+    <div class="form-actions no-color">
+        <input type="submit" value="Deletar" class="btn btn-default" />
+    </div>
+    <div class="btn btn-primary" style="margin-top:5px;">
+        @Html.ActionLink("Voltar", "Index", null, new { style = "color:white;" })
+    </div>
+</div>

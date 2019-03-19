@@ -1,0 +1,59 @@
+﻿@model IEnumerable<UniinfoAsp.Models.Funcionario>
+
+@{
+    ViewBag.Title = "Funcionarios";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.ViewBag
+<div style="margin:0px 100px;">
+    <h2 style="margin:90px 0px 10px 0px;">Funcionarios</h2>
+    <p>
+        @Html.ActionLink("Cadastrar novo funcionario", "Create")
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ramal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nComputador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.setor)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ramal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nComputador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.setor)
+            </td>
+            <td class="btn btn-primary" style=" margin:0px 5px 5px 10px;">
+            @Html.ActionLink("Editar", "Edit", new { id = item.idFuncionario }, new {style = "color:white; padding:10px;"})
+            </td>
+        </tr>
+        }
+
+    </table>
+</div>

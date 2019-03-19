@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Uniinfo</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <header class="bg-white py-1">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <h1>
+                        <a class="navbar-brand"><img src="~/Content/images/icone.png" alt="" class="img-fluid" />@Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>
+                    </h1>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-lg-4 mr-auto">
+                            <li>@Html.ActionLink("Entrar", "Login", "Account", null, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Sobre nós", "Index", "Sobre", null, new { @class = "nav-link" })</li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <!-- copyright -->
+    <section style="padding:30px 0px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-9">
+                    <p class="" style="margin-top:10px; margin-bottom:-10px;">
+                        &copy; @DateTime.Now.Year - Uniinfo. Todos os direitos reservados.
+                    </p>
+                </div>
+                <div class="col-lg-5 col-md-3">
+                    <ul class="social-iconsv2 agileinfo d-flex">
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-facebook-square"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- copyright -->
+</body>
+</html>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)

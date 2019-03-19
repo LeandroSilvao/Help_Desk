@@ -1,0 +1,55 @@
+﻿@model UniinfoAsp.Models.Loginn
+
+@{
+    ViewBag.Title = "Detalhes";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.ViewBag
+
+<div style="margin:90px 250px 20px 320px;">
+    <h4>Detalhes</h4>
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Funcionario.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Funcionario.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Funcionario.nComputador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Funcionario.nComputador)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-default" />
+        </div>
+    }
+    <div class="btn btn-primary" style="margin-top:5px;">
+        @Html.ActionLink("Voltar", "Index", null, new { style = "color:white;" })
+    </div>
+    <br>
+    <br>
+    <p class="mb-4">
+        @ViewBag.message
+    </p>
+</div>
+

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UnipModelEntitiesStoreContainer" CdmEntityContainer="UnipEntities">
+    <EntitySetMapping Name="Chamadoes">
+      <EntityTypeMapping TypeName="UnipModelEntities.Chamado">
+        <MappingFragment StoreEntitySet="Chamado">
+          <ScalarProperty Name="idChamado" ColumnName="idChamado" />
+          <ScalarProperty Name="idFuncionario" ColumnName="idFuncionario" />
+          <ScalarProperty Name="idProblema" ColumnName="idProblema" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="dataChamado" ColumnName="dataChamado" />
+          <ScalarProperty Name="statusAtendimento" ColumnName="statusAtendimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="chamadoAtendimentoes">
+      <EntityTypeMapping TypeName="UnipModelEntities.chamadoAtendimento">
+        <MappingFragment StoreEntitySet="chamadoAtendimento">
+          <ScalarProperty Name="idAtendimento" ColumnName="idAtendimento" />
+          <ScalarProperty Name="idFuncionario" ColumnName="idFuncionario" />
+          <ScalarProperty Name="idChamado" ColumnName="idChamado" />
+          <ScalarProperty Name="dataAtendimento" ColumnName="dataAtendimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Funcionarios">
+      <EntityTypeMapping TypeName="UnipModelEntities.Funcionario">
+        <MappingFragment StoreEntitySet="Funcionario">
+          <ScalarProperty Name="idFuncionario" ColumnName="idFuncionario" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="ramal" ColumnName="ramal" />
+          <ScalarProperty Name="nComputador" ColumnName="nComputador" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="setor" ColumnName="setor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Loginns">
+      <EntityTypeMapping TypeName="UnipModelEntities.Loginn">
+        <MappingFragment StoreEntitySet="Loginn">
+          <ScalarProperty Name="idLogin" ColumnName="idLogin" />
+          <ScalarProperty Name="idFuncionario" ColumnName="idFuncionario" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+          <ScalarProperty Name="idNivelAcesso" ColumnName="idNivelAcesso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="nivelAcessoes">
+      <EntityTypeMapping TypeName="UnipModelEntities.nivelAcesso">
+        <MappingFragment StoreEntitySet="nivelAcesso">
+          <ScalarProperty Name="idNivelAcesso" ColumnName="idNivelAcesso" />
+          <ScalarProperty Name="tipoAcesso" ColumnName="tipoAcesso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Problemas">
+      <EntityTypeMapping TypeName="UnipModelEntities.Problema">
+        <MappingFragment StoreEntitySet="Problema">
+          <ScalarProperty Name="idProblema" ColumnName="idProblema" />
+          <ScalarProperty Name="tipoProblema" ColumnName="tipoProblema" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Con_Chamado">
+      <EntityTypeMapping TypeName="UnipModelEntities.Con_Chamado">
+        <MappingFragment StoreEntitySet="Con_Chamado">
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="dataChamado" ColumnName="dataChamado" />
+          <ScalarProperty Name="statusAtendimento" ColumnName="statusAtendimento" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vFuncionarios">
+      <EntityTypeMapping TypeName="UnipModelEntities.vFuncionario">
+        <MappingFragment StoreEntitySet="vFuncionario">
+          <ScalarProperty Name="setor" ColumnName="setor" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="nComputador" ColumnName="nComputador" />
+          <ScalarProperty Name="ramal" ColumnName="ramal" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idFuncionario" ColumnName="idFuncionario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

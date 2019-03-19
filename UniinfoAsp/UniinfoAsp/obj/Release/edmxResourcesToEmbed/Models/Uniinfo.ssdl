@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UnipModelEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Chamado">
+    <Key>
+      <PropertyRef Name="idChamado" />
+    </Key>
+    <Property Name="idChamado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idFuncionario" Type="int" Nullable="false" />
+    <Property Name="idProblema" Type="int" Nullable="false" />
+    <Property Name="descricao" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="dataChamado" Type="date" Nullable="false" />
+    <Property Name="statusAtendimento" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="chamadoAtendimento">
+    <Key>
+      <PropertyRef Name="idAtendimento" />
+    </Key>
+    <Property Name="idAtendimento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idFuncionario" Type="int" Nullable="false" />
+    <Property Name="idChamado" Type="int" Nullable="false" />
+    <Property Name="dataAtendimento" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Funcionario">
+    <Key>
+      <PropertyRef Name="idFuncionario" />
+    </Key>
+    <Property Name="idFuncionario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ramal" Type="int" />
+    <Property Name="nComputador" Type="int" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="setor" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Loginn">
+    <Key>
+      <PropertyRef Name="idLogin" />
+    </Key>
+    <Property Name="idLogin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idFuncionario" Type="int" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="senha" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="idNivelAcesso" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="nivelAcesso">
+    <Key>
+      <PropertyRef Name="idNivelAcesso" />
+    </Key>
+    <Property Name="idNivelAcesso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tipoAcesso" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Problema">
+    <Key>
+      <PropertyRef Name="idProblema" />
+    </Key>
+    <Property Name="idProblema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tipoProblema" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'meuBanco.dbo.Con_Chamado' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Con_Chamado">
+    <Key>
+      <PropertyRef Name="descricao" />
+      <PropertyRef Name="dataChamado" />
+      <PropertyRef Name="statusAtendimento" />
+      <PropertyRef Name="nome" />
+    </Key>
+    <Property Name="descricao" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="dataChamado" Type="date" Nullable="false" />
+    <Property Name="statusAtendimento" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'meuBanco.dbo.vFuncionario' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vFuncionario">
+    <Key>
+      <PropertyRef Name="idFuncionario" />
+      <PropertyRef Name="nome" />
+      <PropertyRef Name="email" />
+      <PropertyRef Name="setor" />
+    </Key>
+    <Property Name="idFuncionario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ramal" Type="int" />
+    <Property Name="nComputador" Type="int" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="setor" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Chamado__idFunci__534D60F1">
+    <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+    <End Role="Chamado" Type="Self.Chamado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionario">
+        <PropertyRef Name="idFuncionario" />
+      </Principal>
+      <Dependent Role="Chamado">
+        <PropertyRef Name="idFuncionario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Chamado__idProbl__5441852A">
+    <End Role="Problema" Type="Self.Problema" Multiplicity="1" />
+    <End Role="Chamado" Type="Self.Chamado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Problema">
+        <PropertyRef Name="idProblema" />
+      </Principal>
+      <Dependent Role="Chamado">
+        <PropertyRef Name="idProblema" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chamadoAt__idCha__5812160E">
+    <End Role="Chamado" Type="Self.Chamado" Multiplicity="1" />
+    <End Role="chamadoAtendimento" Type="Self.chamadoAtendimento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chamado">
+        <PropertyRef Name="idChamado" />
+      </Principal>
+      <Dependent Role="chamadoAtendimento">
+        <PropertyRef Name="idChamado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__chamadoAt__idFun__571DF1D5">
+    <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+    <End Role="chamadoAtendimento" Type="Self.chamadoAtendimento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionario">
+        <PropertyRef Name="idFuncionario" />
+      </Principal>
+      <Dependent Role="chamadoAtendimento">
+        <PropertyRef Name="idFuncionario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Loginn__idFuncio__5070F446">
+    <End Role="Funcionario" Type="Self.Funcionario" Multiplicity="1" />
+    <End Role="Loginn" Type="Self.Loginn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Funcionario">
+        <PropertyRef Name="idFuncionario" />
+      </Principal>
+      <Dependent Role="Loginn">
+        <PropertyRef Name="idFuncionario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Loginn__idNivelA__4F7CD00D">
+    <End Role="nivelAcesso" Type="Self.nivelAcesso" Multiplicity="1" />
+    <End Role="Loginn" Type="Self.Loginn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nivelAcesso">
+        <PropertyRef Name="idNivelAcesso" />
+      </Principal>
+      <Dependent Role="Loginn">
+        <PropertyRef Name="idNivelAcesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UnipModelEntitiesStoreContainer">
+    <EntitySet Name="Chamado" EntityType="Self.Chamado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="chamadoAtendimento" EntityType="Self.chamadoAtendimento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Funcionario" EntityType="Self.Funcionario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Loginn" EntityType="Self.Loginn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="nivelAcesso" EntityType="Self.nivelAcesso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Problema" EntityType="Self.Problema" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Con_Chamado" EntityType="Self.Con_Chamado" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Con_Chamado].[descricao] AS [descricao], 
+    [Con_Chamado].[dataChamado] AS [dataChamado], 
+    [Con_Chamado].[statusAtendimento] AS [statusAtendimento], 
+    [Con_Chamado].[nome] AS [nome]
+    FROM [dbo].[Con_Chamado] AS [Con_Chamado]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vFuncionario" EntityType="Self.vFuncionario" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vFuncionario].[idFuncionario] AS [idFuncionario], 
+    [vFuncionario].[nome] AS [nome], 
+    [vFuncionario].[ramal] AS [ramal], 
+    [vFuncionario].[nComputador] AS [nComputador], 
+    [vFuncionario].[email] AS [email], 
+    [vFuncionario].[setor] AS [setor]
+    FROM [dbo].[vFuncionario] AS [vFuncionario]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Chamado__idFunci__534D60F1" Association="Self.FK__Chamado__idFunci__534D60F1">
+      <End Role="Funcionario" EntitySet="Funcionario" />
+      <End Role="Chamado" EntitySet="Chamado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Chamado__idProbl__5441852A" Association="Self.FK__Chamado__idProbl__5441852A">
+      <End Role="Problema" EntitySet="Problema" />
+      <End Role="Chamado" EntitySet="Chamado" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chamadoAt__idCha__5812160E" Association="Self.FK__chamadoAt__idCha__5812160E">
+      <End Role="Chamado" EntitySet="Chamado" />
+      <End Role="chamadoAtendimento" EntitySet="chamadoAtendimento" />
+    </AssociationSet>
+    <AssociationSet Name="FK__chamadoAt__idFun__571DF1D5" Association="Self.FK__chamadoAt__idFun__571DF1D5">
+      <End Role="Funcionario" EntitySet="Funcionario" />
+      <End Role="chamadoAtendimento" EntitySet="chamadoAtendimento" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Loginn__idFuncio__5070F446" Association="Self.FK__Loginn__idFuncio__5070F446">
+      <End Role="Funcionario" EntitySet="Funcionario" />
+      <End Role="Loginn" EntitySet="Loginn" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Loginn__idNivelA__4F7CD00D" Association="Self.FK__Loginn__idNivelA__4F7CD00D">
+      <End Role="nivelAcesso" EntitySet="nivelAcesso" />
+      <End Role="Loginn" EntitySet="Loginn" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
